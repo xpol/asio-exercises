@@ -5,10 +5,17 @@ project(asio-exercises CXX)
 find_package(Boost REQUIRED COMPONENTS system date_time)
 add_compile_options(-std=c++11)
 include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
+
+if(MSVC)
+    add_definitions(-D_WIN32_WINNT=0x0501)
+endif()
 
 function(add_exercises name)
   add_executable(${name} src/${name}.cpp)
-  target_link_libraries(${name} ${Boost_LIBRARIES})
+  if (NOT MSVC) # MSVC version will use boost auto linking
+      target_link_libraries(${name} ${Boost_LIBRARIES})
+  endif()
 endfunction()
 
 add_exercises(timer-sync)
