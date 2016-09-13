@@ -3,12 +3,13 @@
 #include <boost/asio.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
+namespace asio = boost::asio;
 using boost::system::error_code;
 using boost::posix_time::seconds;
 
 class printer {
 public:
-	printer(boost::asio::io_service& io)
+	printer(asio::io_service& io)
 		: strand_(io),
 		timer1_(io, seconds(1)),
 		timer2_(io, seconds(1)),
@@ -49,14 +50,14 @@ private:
 		}
 	}
 
-	boost::asio::io_service::strand strand_;
-	boost::asio::deadline_timer timer1_;
-	boost::asio::deadline_timer timer2_;
+	asio::io_service::strand strand_;
+	asio::deadline_timer timer1_;
+	asio::deadline_timer timer2_;
 	int count_;
 };
 
 int main() {
-	boost::asio::io_service io;
+	asio::io_service io;
 	printer p(io);
 	std::thread t([&](){
 		io.run();
