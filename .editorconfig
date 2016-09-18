@@ -5,3 +5,7 @@ tab_width = 2
 [*.{h,hpp,c,cpp,cs}]
 indent_style = space
 indent_size = 2
+
+[CMakeLists.txt]
+indent_style = space
+indent_size = 2
