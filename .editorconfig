@@ -3,5 +3,5 @@ root = true
 tab_width = 2
 
 [*.{h,hpp,c,cpp,cs}]
-indent_style = tab
+indent_style = space
 indent_size = 2

@@ -8,14 +8,14 @@ using boost::system::error_code;
 using boost::posix_time::seconds;
 
 void print(const error_code&) {
-	std::cout << "Hello world!" << std::endl;
+  std::cout << "Hello world!" << std::endl;
 }
 
 int main() {
-	asio::io_service io;
-	asio::deadline_timer t(io, seconds(5));
+  asio::io_service io;
+  asio::deadline_timer t(io, seconds(5));
 
-	t.async_wait(print);
-	io.run();
-	return 0;
+  t.async_wait(print);
+  io.run();
+  return 0;
 }

@@ -3,9 +3,9 @@
 
 std::string make_daytime_string()
 {
-	using namespace std;
-	auto now = time(nullptr);
-	return std::string(ctime(&now));
+  using namespace std;
+  auto now = time(nullptr);
+  return std::string(ctime(&now));
 }
 
 
