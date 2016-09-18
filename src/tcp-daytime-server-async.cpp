@@ -4,16 +4,12 @@
 #include <string>
 #include <boost/asio.hpp>
 
+#include "daytime.hpp"
+
 namespace asio = boost::asio;
 using asio::ip::tcp;
 using boost::system::error_code;
 
-std::string make_daytime_string()
-{
-	using namespace std;
-	auto now = time(0);
-	return ctime(&now);
-}
 
 class tcp_connection : public std::enable_shared_from_this<tcp_connection>
 {

@@ -2,16 +2,12 @@
 #include <array>
 #include <boost/asio.hpp>
 
+#include "daytime.hpp"
+
 namespace asio = boost::asio;
 using asio::ip::udp;
 using boost::system::error_code;
 
-std::string make_daytime_string()
-{
-	using namespace std;
-	auto now = time(0);
-	return ctime(&now);
-}
 
 class udp_server
 {

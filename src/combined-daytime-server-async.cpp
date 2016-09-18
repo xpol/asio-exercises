@@ -2,21 +2,14 @@
 #include <ctime>
 #include <iostream>
 #include <memory>
-
 #include <boost/asio.hpp>
+
+#include "daytime.hpp"
 
 namespace asio = boost::asio;
 using asio::ip::tcp;
 using asio::ip::udp;
 using boost::system::error_code;
-
-std::shared_ptr<std::string> make_daytime_string()
-{
-	using namespace std;
-	auto now = time(nullptr);
-	return std::make_shared<std::string>(ctime(&now));
-}
-
 
 
 class tcp_connection : public std::enable_shared_from_this<tcp_connection>
@@ -35,7 +28,7 @@ public:
 
 	void start()
 	{
-		auto message = make_daytime_string();
+		auto message = std::make_shared<std::string>(make_daytime_string());
 		auto ptr = shared_from_this();
 		asio::async_write(socket_, asio::buffer(*message), [ptr, message](const error_code& error, size_t bytes_transfered)
 		{
@@ -105,7 +98,7 @@ private:
 	}
 	void handle_receive(const error_code& error, size_t bytes_transferred) {
 		if (!error || error == asio::error::message_size) {
-			auto message = make_daytime_string();
+			auto message = std::make_shared<std::string>(make_daytime_string());
 			socket_.async_send_to(asio::buffer(*message), remote_endpoint_, [this, message](const error_code& error, size_t bytes_transferred) {
 				handle_send(message, error);
 			});
