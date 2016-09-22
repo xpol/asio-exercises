@@ -1,14 +1,14 @@
 #include <cstdlib>
 #include <deque>
 #include <iostream>
+#include <system_error>
 #include <thread>
-#include <boost/asio.hpp>
 
+#include <asio.hpp>
 #include "message.hpp"
 
-namespace asio = boost::asio;
 using asio::ip::tcp;
-using boost::system::error_code;
+using std::error_code;
 
 typedef std::deque<message> message_queue;
 
@@ -27,7 +27,7 @@ public:
       write_msgs_.push_back(msg);
       if (!write_in_progress) {
         do_write();
-      }        
+      }
     });
   }
 

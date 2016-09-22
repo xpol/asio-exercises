@@ -1,11 +1,11 @@
+#include <chrono>
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/system/error_code.hpp>
+#include <system_error>
 
-namespace asio = boost::asio;
-using boost::system::error_code;
-using boost::posix_time::seconds;
+#include <asio.hpp>
+
+using std::error_code;
+using std::chrono::seconds;
 
 void print(const error_code&) {
   std::cout << "Hello world!" << std::endl;
@@ -13,7 +13,7 @@ void print(const error_code&) {
 
 int main() {
   asio::io_service io;
-  asio::deadline_timer t(io, seconds(5));
+  asio::steady_timer t(io, seconds(5));
 
   t.async_wait(print);
   io.run();

@@ -1,12 +1,12 @@
 #include <iostream>
 #include <array>
-#include <boost/asio.hpp>
+#include <system_error>
 
+#include <asio.hpp>
 #include "daytime.hpp"
 
-namespace asio = boost::asio;
 using asio::ip::udp;
-using boost::system::error_code;
+using std::error_code;
 
 
 int main()
@@ -22,7 +22,7 @@ int main()
       error_code error;
       socket.receive_from(asio::buffer(recv_buf), remote_endpoint, 0, error);
       if (error && error != asio::error::message_size)
-        throw boost::system::system_error(error);
+        throw std::system_error(error);
 
       auto message = make_daytime_string();
       error_code ignored_error;

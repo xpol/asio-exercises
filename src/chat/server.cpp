@@ -4,15 +4,15 @@
 #include <list>
 #include <memory>
 #include <set>
+#include <system_error>
 #include <utility>
 
-#include <boost/asio.hpp>
+#include <asio.hpp>
 
 #include "message.hpp"
 
-namespace asio = boost::asio;
 using asio::ip::tcp;
-using boost::system::error_code;
+using std::error_code;
 
 typedef std::deque<message> message_queue;
 
@@ -80,7 +80,7 @@ public:
     if (!write_in_porgress) {
       do_write();
     }
-  }  
+  }
 private:
   void do_read_header() {
     auto self(shared_from_this());

@@ -2,13 +2,13 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include <boost/asio.hpp>
+#include <system_error>
 
+#include <asio.hpp>
 #include "daytime.hpp"
 
-namespace asio = boost::asio;
 using asio::ip::tcp;
-using boost::system::error_code;
+using std::error_code;
 
 
 class tcp_connection : public std::enable_shared_from_this<tcp_connection>

@@ -1,8 +1,7 @@
 #include <iostream>
 #include <array>
-#include <boost/asio.hpp>
+#include <asio.hpp>
 
-namespace asio = boost::asio;
 using asio::ip::udp;
 
 int main(int argc, char* argv[])

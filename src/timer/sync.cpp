@@ -1,13 +1,12 @@
+#include <chrono>
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <asio.hpp>
 
-namespace asio = boost::asio;
-using boost::posix_time::seconds;
+using std::chrono::seconds;
 
 int main() {
   asio::io_service io;
-  asio::deadline_timer t(io, seconds(5));
+  asio::steady_timer t(io, seconds(5));
 
   t.wait();
   std::cout << "Hello world!" << std::endl;

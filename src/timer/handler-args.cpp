@@ -1,12 +1,13 @@
+#include <chrono>
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <system_error>
 
-namespace asio = boost::asio;
-using boost::posix_time::seconds;
-using boost::system::error_code;
+#include <asio.hpp>
 
-void print(const error_code& , asio::deadline_timer* t, int* count) {
+using std::chrono::seconds;
+using std::error_code;
+
+void print(const error_code& , asio::steady_timer* t, int* count) {
   if (*count < 5) {
     std::cout << *count << std::endl;
     ++(*count);
@@ -20,7 +21,7 @@ void print(const error_code& , asio::deadline_timer* t, int* count) {
 int main() {
   asio::io_service io;
   auto count = 0;
-  asio::deadline_timer t(io, seconds(1));
+  asio::steady_timer t(io, seconds(1));
   t.async_wait([&](const error_code& e) {
     print(e, &t, &count);
   });

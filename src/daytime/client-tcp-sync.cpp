@@ -1,10 +1,10 @@
 #include <array>
 #include <iostream>
-#include <boost/asio.hpp>
+#include <system_error>
+#include <asio.hpp>
 
-namespace asio = boost::asio;
 using asio::ip::tcp;
-using boost::system::error_code;
+using std::error_code;
 
 int main(int argc, char* argv[])
 {
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
       if (error == asio::error::eof)
         break;
       if (error)
-        throw boost::system::system_error(error);
+        throw std::system_error(error);
       std::cout.write(buf.data(), len);
     }
   }

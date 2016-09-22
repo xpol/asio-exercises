@@ -1,10 +1,12 @@
+#include <chrono>
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <system_error>
 
-namespace asio = boost::asio;
-using boost::posix_time::seconds;
-using boost::system::error_code;
+#include <asio.hpp>
+
+
+using std::chrono::seconds;
+using std::error_code;
 
 class printer {
 public:
@@ -32,7 +34,7 @@ private:
     }
   }
 
-  asio::deadline_timer timer_;
+  asio::steady_timer timer_;
   int count_;
 };
 

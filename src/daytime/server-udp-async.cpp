@@ -1,12 +1,12 @@
 #include <iostream>
 #include <array>
-#include <boost/asio.hpp>
+#include <system_error>
 
+#include <asio.hpp>
 #include "daytime.hpp"
 
-namespace asio = boost::asio;
 using asio::ip::udp;
-using boost::system::error_code;
+using std::error_code;
 
 
 class udp_server

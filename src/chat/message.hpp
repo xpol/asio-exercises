@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <cstring>
 
-#include <boost/asio/buffer.hpp>
+#include "asio/buffer.hpp"
 
 class message {
 public:
@@ -61,15 +61,15 @@ private:
 };
 
 inline auto header_buffer(message& msg) {
-  return boost::asio::buffer(msg.data(), message::header_length);
+  return asio::buffer(msg.data(), message::header_length);
 }
 
 inline auto body_buffer(message& msg) {
-  return boost::asio::buffer(msg.body(), msg.body_length());
+  return asio::buffer(msg.body(), msg.body_length());
 }
 
 inline auto message_buffer(message& msg) {
-  return boost::asio::buffer(msg.data(), msg.body_length()+message::header_length);
+  return asio::buffer(msg.data(), msg.body_length()+message::header_length);
 }
 
 #endif
